@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+
+    
+    <title>Using Venv - Operationalize Your Python!</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../../css/base.min.css" rel="stylesheet">
+    <link href="../../css/cinder.min.css" rel="stylesheet">
+
+    
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
+        
+    
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            <a class="navbar-brand" href="../..">Operationalize Your Python!</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="../..">Welcome!</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">OYP One <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li class="active">
+    <a href="./">Using Venv</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../..">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li class="disabled">
+                        <a rel="next" >
+                            Next <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#proper-virtual-environment-usage">Proper Virtual Environment Usage</a></li>
+            <li class="second-level"><a href="#why-a-virtual-environment">Why a virtual environment?</a></li>
+                
+            <li class="second-level"><a href="#how-to-create-a-virtual-environment">How to create a virtual environment:</a></li>
+                
+                <li class="third-level"><a href="#figure-1">Figure 1</a></li>
+            <li class="second-level"><a href="#using-your-new-virtual-environment">Using your new virtual environment</a></li>
+                
+            <li class="second-level"><a href="#your-turn">Your Turn:</a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h3 id="proper-virtual-environment-usage">Proper Virtual Environment Usage</h3>
+<h4 id="why-a-virtual-environment">Why a virtual environment?</h4>
+<p>In a nutshell a virtual environment is a self-contained python environment and using it ensures that any packages
+installed in it are isolated and protected from being unwittingly modified. When you pip-install a python package into
+a virtual environment the package is stored in the <code>.../site-packages</code> directory relative to the virtual environment;
+any interpreter/application running under this virtual environment will have access to this package. This is opposed to
+installing the package into the global python environment, where any python interpreter/application running from it is 
+slave to the exact version which was installed. If, said application or any of it's dependencies, needed a different
+version of a package, upgrading it in the global python environment would be a solution, albeit a poor one.</p>
+<p>The simplest and most effective solution is to use virtual environments </p>
+<blockquote>
+<p>NEVER install packages into the global python environment...EVER</p>
+</blockquote>
+<h4 id="how-to-create-a-virtual-environment">How to create a virtual environment:</h4>
+<p>Simply use the <code>venv</code> utility to create your virtual environment from the global python. The full command is:
+<code>python3 -m venv ./{name-here}</code></p>
+<h5 id="figure-1">Figure 1</h5>
+<pre><code>~&gt; which python
+/usr/bin/python
+
+~&gt; python --version
+Python 2.7.16
+
+~&gt; which python3
+/Library/Frameworks/Python.framework/Versions/3.8/bin/python3
+
+~&gt; python3 --version
+Python 3.8.2
+
+~&gt; python3 -m venv ./.venv
+
+~&gt; ls -a ./
+.      ..     .idea  .venv  OYPOne
+
+~&gt; source ./.venv/bin/activate
+
+(.venv) ~&gt; which python
+/Users/southa7/PycharmProjects/OYP/.venv/bin/python
+
+(.venv) ~&gt; python --version
+Python 3.8.2
+</code></pre>
+
+<h4 id="using-your-new-virtual-environment">Using your new virtual environment</h4>
+<p>In <a href="#figure-1">figure 1</a> you will see that after the virtual environment is created we source a file called <code>activate</code>.
+This adds the virtual environment's bin directory to your user path, so the <code>python</code> command now points to the python
+in your virtual environment.</p>
+<p>To exit or deactivate the virtual environment, simply use the command <code>deactivate</code></p>
+<h4 id="your-turn">Your Turn:</h4>
+<ol>
+<li>Create a virtual environment in your home directory</li>
+<li>Copy <code>pip.conf</code> into your virtual environment directory</li>
+<li>Activate the virtual environment</li>
+<li>Run <code>pip install requests==2.22.0</code></li>
+<li>Run <code>pip freeze</code></li>
+<li>Deactivate your virtual environment</li>
+<li>Create another virtual environment in your home directory</li>
+<li>Copy <code>pip.conf</code> into this new virtual environment directory</li>
+<li>Activate the virtual environment</li>
+<li>Run <code>pip install requests</code></li>
+<li>Run <code>pip freeze</code></li>
+<li>Deactivate your virtual environment</li>
+</ol>
+<p>Now compare the outputs of pip freeze and you can see that there are two separate versions
+of requests installed independent of each other.</p></div>
+        
+        
+    </div>
+
+    <footer class="col-md-12 text-center">
+        
+        <hr>
+        <p>
+        <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+        </p>
+
+        
+        
+    </footer>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../js/bootstrap-3.0.3.min.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+        
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    <script>var base_url = "../.."</script>
+    
+    <script src="../../js/base.js"></script>
+    <script src="../../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>
